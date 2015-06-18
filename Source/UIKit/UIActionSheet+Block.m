@@ -236,7 +236,13 @@ static UIView *_inView;
         [self showInView:[UIApplication sharedApplication].keyWindow];
     }
     else {
-        [self showFromRect:[view frame] inView:[UIApplication sharedApplication].keyWindow animated:YES];
+        id superview = view.superview;
+        
+        if (!superview) {
+            superview = [UIApplication sharedApplication].keyWindow;
+        }
+        
+        [self showFromRect:[view frame] inView:superview animated:YES];
     }
 }
 
